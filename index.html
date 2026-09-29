@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Kalkulator Anuitas</title>
+
+
+<style>
+
+/* =========================
+   DASAR
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+    "Trebuchet MS",
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(0,0,0,0.025) 1px,
+        transparent 1px
+    ),
+    linear-gradient(
+        rgba(0,0,0,0.025) 1px,
+        transparent 1px
+    ),
+    #fafafa;
+
+    background-size: 35px 35px;
+
+    color: #171717;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: white;
+
+    border-bottom: 4px solid #111;
+
+    padding: 45px 20px 50px;
+
+    text-align: center;
+}
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 46px;
+
+    font-weight: 900;
+
+    transform: rotate(-1deg);
+
+    text-shadow:
+    3px 3px 0px #ffd84d;
+}
+
+header p {
+
+    margin-top: 12px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   DEKORASI
+========================= */
+
+.doodle {
+
+    position: absolute;
+
+    font-size: 65px;
+
+    user-select: none;
+}
+
+.gear1 {
+
+    top: 25px;
+
+    left: 8%;
+
+    transform: rotate(-15deg);
+}
+
+.gear2 {
+
+    top: 80px;
+
+    right: 10%;
+
+    transform: rotate(20deg);
+
+    font-size: 48px;
+}
+
+.rocket {
+
+    left: 4%;
+
+    bottom: 20px;
+
+    transform: rotate(-20deg);
+}
+
+.chart {
+
+    right: 4%;
+
+    bottom: 15px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+    width: 92%;
+
+    max-width: 1150px;
+
+    margin: 35px auto;
+}
+
+
+/* =========================
+   KARTU
+========================= */
+
+.card {
+
+    background: white;
+
+    border: 3px solid #111;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+    7px 7px 0px #111;
+
+    position: relative;
+}
+
+
+/* =========================
+   JUDUL
+========================= */
+
+.judul {
+
+    display: inline-block;
+
+    font-size: 25px;
+
+    border-bottom: 4px solid #111;
+
+    margin-bottom: 20px;
+
+    transform: rotate(-1deg);
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+    repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    font-size: 16px;
+}
+
+input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: 3px solid #111;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    background: #fffdf0;
+
+    outline: none;
+}
+
+input:focus {
+
+    background: #fff4a8;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.button-area {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+button {
+
+    flex: 1;
+
+    padding: 15px;
+
+    border: 3px solid #111;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 4px 4px 0 #111;
+
+    transition: 0.15s;
+}
+
+button:active {
+
+    box-shadow: 1px 1px 0 #111;
+
+    transform:
+    translate(3px, 3px);
+}
+
+.btn-hitung {
+
+    background: #ffd84d;
+}
+
+.btn-reset {
+
+    background: #ff7777;
+}
+
+
+/* =========================
+   HASIL
+========================= */
+
+.hasil-grid {
+
+    display: grid;
+
+    grid-template-columns:
+    repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.hasil-box {
+
+    border: 3px solid #111;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: white;
+
+    box-shadow:
+    4px 4px 0 #111;
+}
+
+.hasil-box:nth-child(1) {
+
+    background: #bde7ff;
+}
+
+.hasil-box:nth-child(2) {
+
+    background: #c8f7c5;
+}
+
+.hasil-box:nth-child(3) {
+
+    background: #ffd4e0;
+}
+
+.hasil-box h3 {
+
+    margin:
+    0 0 12px;
+
+    font-size: 15px;
+}
+
+.hasil-box p {
+
+    margin: 0;
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+
+/* =========================
+   TABEL
+========================= */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 3px solid #111;
+
+    border-radius: 12px;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 700px;
+}
+
+th {
+
+    background: #111;
+
+    color: white;
+
+    padding: 13px;
+
+    text-align: center;
+
+    font-size: 15px;
+}
+
+td {
+
+    padding: 11px;
+
+    border-bottom:
+    2px solid #ddd;
+
+    text-align: right;
+
+    font-size: 14px;
+}
+
+td:first-child {
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+
+    background: #fffbea;
+}
+
+tr:hover {
+
+    background: #fff1a8;
+}
+
+
+/* =========================
+   ANGGOTA
+========================= */
+
+.anggota {
+
+    background: white;
+
+    border: 3px solid #111;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow:
+    7px 7px 0 #111;
+
+    margin-bottom: 40px;
+}
+
+.anggota h2 {
+
+    text-align: center;
+
+    margin-top: 0;
+
+    text-decoration: underline;
+}
+
+.nama {
+
+    padding: 10px;
+
+    margin: 8px auto;
+
+    max-width: 600px;
+
+    border: 2px solid #111;
+
+    border-radius: 10px;
+
+    background: #fff5a8;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 25px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   HP
+========================= */
+
+@media (max-width: 800px) {
+
+    header h1 {
+
+        font-size: 32px;
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .hasil-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .doodle {
+
+        display: none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="doodle gear1">⚙️</div>
+
+    <div class="doodle gear2">⚙️</div>
+
+    <div class="doodle rocket">🚀</div>
+
+    <div class="doodle chart">📊</div>
+
+
+    <h1>
+        KALKULATOR ANUITAS
+    </h1>
+
+    <p>
+        Menghitung cicilan dengan bunga per bulan
+    </p>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+     DATA PINJAMAN
+========================= -->
+
+<div class="card">
+
+    <h2 class="judul">
+        Data Pinjaman
+    </h2>
+
+
+    <div class="form-grid">
+
+
+        <div>
+
+            <label>
+                Jumlah Pinjaman (Rp)
+            </label>
+
+            <input
+                type="number"
+                id="pinjaman"
+                placeholder="Contoh: 10000000"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Bunga per Bulan (%)
+            </label>
+
+            <input
+                type="number"
+                id="bunga"
+                step="0.01"
+                placeholder="Contoh: 1"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Lama Pinjaman (Bulan)
+            </label>
+
+            <input
+                type="number"
+                id="bulan"
+                placeholder="Contoh: 24"
+            >
+
+        </div>
+
+
+    </div>
+
+
+    <div class="button-area">
+
+
+        <button
+            class="btn-hitung"
+            onclick="hitungAnuitas()">
+
+            HITUNG ANUITAS
+
+        </button>
+
+
+        <button
+            class="btn-reset"
+            onclick="resetForm()">
+
+            RESET
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     HASIL
+========================= -->
+
+<div class="card">
+
+    <h2 class="judul">
+        Hasil Perhitungan
+    </h2>
+
+
+    <div class="hasil-grid">
+
+
+        <div class="hasil-box">
+
+            <h3>
+                Anuitas per Bulan
+            </h3>
+
+            <p id="anuitas">
+                Rp 0
+            </p>
+
+        </div>
+
+
+        <div class="hasil-box">
+
+            <h3>
+                Total Pembayaran
+            </h3>
+
+            <p id="total">
+                Rp 0
+            </p>
+
+        </div>
+
+
+        <div class="hasil-box">
+
+            <h3>
+                Total Bunga
+            </h3>
+
+            <p id="totalBunga">
+                Rp 0
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     TABEL
+========================= -->
+
+<div class="card">
+
+    <h2 class="judul">
+        Tabel Angsuran
+    </h2>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Bulan
+                    </th>
+
+                    <th>
+                        Angsuran Pokok
+                    </th>
+
+                    <th>
+                        Bunga
+                    </th>
+
+                    <th>
+                        Anuitas
+                    </th>
+
+                    <th>
+                        Sisa Hutang
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tabelAngsuran">
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                        text-align:center;
+                        padding:25px;
+                        ">
+
+                        Masukkan data pinjaman
+                        kemudian klik
+                        "HITUNG ANUITAS".
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     NAMA KELOMPOK
+========================= -->
+
+<div class="anggota">
+
+    <h2>
+        Anggota Kelompok
+    </h2>
+
+
+    <div class="nama">
+        Aini Kharisma Lestari (1)
+    </div>
+
+
+    <div class="nama">
+        Dinda Verlitha Putri (10)
+    </div>
+
+
+    <div class="nama">
+        Farrel Aziz Alaudin Khadafi (12)
+    </div>
+
+
+    <div class="nama">
+        Harits Firly Wibowo (15)
+    </div>
+
+
+    <div class="nama">
+        Radhi Abyasa Rizki (28)
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<footer>
+
+    Kalkulator Anuitas • Proyek Matematika
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================
+   HITUNG ANUITAS
+========================= */
+
+function hitungAnuitas() {
+
+
+    let P =
+        Number(
+            document.getElementById(
+                "pinjaman"
+            ).value
+        );
+
+
+    let bunga =
+        Number(
+            document.getElementById(
+                "bunga"
+            ).value
+        );
+
+
+    let n =
+        Number(
+            document.getElementById(
+                "bulan"
+            ).value
+        );
+
+
+    /* VALIDASI */
+
+    if (
+        P <= 0 ||
+        bunga < 0 ||
+        n <= 0
+    ) {
+
+        alert(
+            "Masukkan data dengan benar!"
+        );
+
+        return;
+    }
+
+
+    /* BUNGA PER BULAN */
+
+    let i =
+        bunga / 100;
+
+
+    /* RUMUS ANUITAS */
+
+    let A;
+
+
+    if (i === 0) {
+
+        A =
+            P / n;
+
+    }
+
+    else {
+
+        A =
+            P *
+            (
+                i *
+                Math.pow(
+                    1 + i,
+                    n
+                )
+            )
+            /
+            (
+                Math.pow(
+                    1 + i,
+                    n
+                ) - 1
+            );
+
+    }
+
+
+    /* TOTAL */
+
+    let total =
+        A * n;
+
+
+    let totalBunga =
+        total - P;
+
+
+    /* TAMPILKAN HASIL */
+
+    document.getElementById(
+        "anuitas"
+    ).innerText =
+        rupiah(A);
+
+
+    document.getElementById(
+        "total"
+    ).innerText =
+        rupiah(total);
+
+
+    document.getElementById(
+        "totalBunga"
+    ).innerText =
+        rupiah(totalBunga);
+
+
+
+    /* =========================
+       TABEL ANGSURAN
+    ========================= */
+
+    let tabel =
+        document.getElementById(
+            "tabelAngsuran"
+        );
+
+
+    tabel.innerHTML = "";
+
+
+    let sisa =
+        P;
+
+
+    for (
+        let bulan = 1;
+        bulan <= n;
+        bulan++
+    ) {
+
+
+        /* BUNGA */
+
+        let bungaBulan =
+            sisa * i;
+
+
+        /* ANGSURAN POKOK */
+
+        let angsuranPokok =
+            A - bungaBulan;
+
+
+        /* SISA HUTANG */
+
+        sisa =
+            sisa -
+            angsuranPokok;
+
+
+        if (
+            bulan === n ||
+            Math.abs(sisa) < 0.01
+        ) {
+
+            sisa = 0;
+
+        }
+
+
+        /* BARIS TABEL */
+
+        let row =
+            document.createElement(
+                "tr"
+            );
+
+
+        row.innerHTML = `
+
+            <td>
+                ${bulan}
+            </td>
+
+            <td>
+                ${rupiah(
+                    angsuranPokok
+                )}
+            </td>
+
+            <td>
+                ${rupiah(
+                    bungaBulan
+                )}
+            </td>
+
+            <td>
+                ${rupiah(A)}
+            </td>
+
+            <td>
+                ${rupiah(sisa)}
+            </td>
+
+        `;
+
+
+        tabel.appendChild(row);
+
+    }
+
+}
+
+
+
+/* =========================
+   RUPIAH
+========================= */
+
+function rupiah(angka) {
+
+    return new Intl.NumberFormat(
+        "id-ID",
+        {
+
+            style: "currency",
+
+            currency: "IDR",
+
+            maximumFractionDigits: 0
+
+        }
+
+    ).format(angka);
+
+}
+
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetForm() {
+
+
+    document.getElementById(
+        "pinjaman"
+    ).value = "";
+
+
+    document.getElementById(
+        "bunga"
+    ).value = "";
+
+
+    document.getElementById(
+        "bulan"
+    ).value = "";
+
+
+    document.getElementById(
+        "anuitas"
+    ).innerText =
+        "Rp 0";
+
+
+    document.getElementById(
+        "total"
+    ).innerText =
+        "Rp 0";
+
+
+    document.getElementById(
+        "totalBunga"
+    ).innerText =
+        "Rp 0";
+
+
+    document.getElementById(
+        "tabelAngsuran"
+    ).innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="5"
+                style="
+                text-align:center;
+                padding:25px;
+                ">
+
+                Masukkan data pinjaman
+                kemudian klik
+                "HITUNG ANUITAS".
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
